@@ -1,0 +1,117 @@
+<extend name="Base/common"/>
+
+<block name="header">
+</block>
+
+<block name="side">
+</block>
+
+<block name="body">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+            <h1 class="my-4">
+             <!--  一个优雅而小巧的 PHP 框架 -->
+                <small></small>
+            </h1>
+            <!-- Blog Post -->
+            <volist name="lists" id="article">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        <a class="list-title" href="{:U('Article/detail?id='.$article['id'])}">{$article.title}</a>
+                    </h2>
+                    <p class="card-text post-near">{$article.description}</p>
+                    <a class="" href="{:U('Article/detail?id='.$article['id'])}">查看全文 →</a>
+                </div>
+                <div class="card-footer text-muted">
+                    <span class="author">{$article.uid|get_username}</span>
+                    <span>发表于 {$article.create_time|date='Y-m-d H:i',###}</span>
+                    <span> &nbsp;&nbsp;所属分类 <a href="{:U('Article/lists?category='.get_category_name($article['category_id']))}">{$article.category_id|get_category_title}</a></span> &nbsp;&nbsp;阅读数({$article.view})
+                </div>
+            </div>
+            </volist>
+            <!-- Pagination -->
+            {$page}
+        </div>
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+            <!-- Search Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">
+                    搜索
+                </h5>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="架构之美"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button" id="search">
+                                Go!
+                            </button>
+                            <script type="text/javascript">
+                                $(function(){
+                                    $('button#search').click(function(){
+                                        var value=$('input.form-control').val();
+                                        var str="{:U('Article/search?keyword=value')}"
+                                        url =  str.replace("value",value);
+                                        window.location.href=url;
+                                    });
+                                    $('input.form-control').bind('keypress', function (event) { 
+                                        if (event.keyCode == "13") { 
+                                            $("button#search").click();
+                                        }
+                                    });
+                                })
+                            </script>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- Categories Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">
+                    文章分类
+                </h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled mb-0">
+                                <volist name="cate_list1" id="cate">
+                                    <li>
+                                        <a href="{:U('Article/lists?category='.get_category_name($cate['id']))}">
+                                            {$cate.title}
+                                        </a>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled mb-0">
+                                <volist name="cate_list2" id="cate">
+                                    <li>
+                                        <a href="{:U('Article/lists?category='.get_category_name($cate['id']))}">
+                                            {$cate.title}
+                                        </a>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Side Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">
+                    公告墙
+                </h5>
+                <div class="card-body">
+                    <p>资讯板块旨在分享一些优质技术文章，如有侵权请及时告知！</p>
+                    <p> Email： <a href="mailto:admin@nimip.com">admin@nimip.com</a>
+                    <br>
+                    QQ：1289352797
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

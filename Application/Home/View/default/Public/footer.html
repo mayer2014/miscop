@@ -1,0 +1,17 @@
+
+    <!-- 底部
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+          <p> 本站由 <strong><a href="{:C('WEB_URL')}" target="_blank">Miscop</a></strong> 强力驱动
+           © 2014-2017 www.nimip.com 版权所有 ICP证：粤ICP备17004071</p>
+      </div>
+    </footer>
+
+<include file="Public/var"/>
+<block name="script"></block> <!-- 用于加载js代码 -->
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+{:hook('pageFooter', 'widget')}
+<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+	<block name="hidden"></block>
+</div>
