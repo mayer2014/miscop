@@ -89,7 +89,7 @@ class CategoryModel extends Model{
     public function getPid($id = 0){
         /* 获取所有分类 */
         $map  = array('pid'=>$id,'status' => 1);
-        return $this->where($map)->field('id,title')->select();
+        return $this->where($map)->field('id,title')->order('sort')->select();
     }
 
     /**
